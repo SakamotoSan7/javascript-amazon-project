@@ -20,7 +20,6 @@ module.exports = {
         sourceType: "module",
     },
     rules: {
-        "linebreak-style": ["error", "windows"],
-        semi: ["error", "always"],
+        "linebreak-style": ["error", "windows"]
     },
 };
