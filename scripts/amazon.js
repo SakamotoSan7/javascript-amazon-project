@@ -1,6 +1,6 @@
-import { cart, addToCart } from '../data/cart.js';
-import { products } from '../data/products.js';
-import { formatCurrency } from './utils/money.js';
+import {addToCart, cartQuantityTotal} from '../data/cart.js';
+import {products} from '../data/products.js';
+import {formatCurrency} from './utils/money.js';
 
 let productsHTML = '';
 
@@ -29,18 +29,18 @@ products.forEach((product) => {
             </div>
 
             <div class="product-quantity-container">
-            <select>
-                <option selected value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
+                <select class="js-add-cart-quantity-${product.id}">
+                    <option selected value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
             </div>
 
             <div class="product-spacer"></div>
@@ -52,7 +52,7 @@ products.forEach((product) => {
 
             <button class="add-to-cart-button button-primary js-add-to-cart-button"
             data-product-id="${product.id}">
-            Add to Cart
+                Add to Cart
             </button>
         </div>
     `;
@@ -60,12 +60,10 @@ products.forEach((product) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-function addCartQuantity() {
-	let cartQuantity = 0;
+document.querySelector('.js-cart-quantity').innerHTML = cartQuantityTotal();
 
-	cart.forEach((cartItem) => {
-		cartQuantity += cartItem.quantity;
-	});
+function addCartQuantity() {
+	let cartQuantity = cartQuantityTotal();
 
 	document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
@@ -73,8 +71,11 @@ function addCartQuantity() {
 document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
 	button.addEventListener('click', () => {
 		const productId = button.dataset.productId;
+		const quantityInput = document.querySelector(`.js-add-cart-quantity-${productId}`);
+		const input = Number(quantityInput.value);
 
-		addToCart(productId);
+		addToCart(productId, input);
 		addCartQuantity();
 	});
 });
+
