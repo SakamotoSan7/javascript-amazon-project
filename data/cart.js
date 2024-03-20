@@ -83,6 +83,9 @@ export function cartQuantityTotal() {
 }
 
 export function renderCartQuantity() {
-	document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantityTotal()} items`;
 	document.querySelector('.js-items-quantity').innerHTML = `Items (${cartQuantityTotal()}):`;
+}
+
+export function renderItemsQuantity() {
+	document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantityTotal()} items`;
 }
