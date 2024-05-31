@@ -1,9 +1,9 @@
-import {cart, removeFromCart, renderCartQuantity, updateDeliveryOption, updateQuantity} from '../../data/cart.js';
-import {getProduct} from '../../data/products.js';
-import {formatCurrency} from '../utils/money.js';
+import { cart, removeFromCart, renderCartQuantity, updateDeliveryOption, updateQuantity } from '../../data/cart.js';
+import { getProduct } from '../../data/products.js';
+import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import {deliveryOptions, getDeliveryOption} from '../../data/DeliveryOptions.js';
-import {renderPaymentSummary} from './paymentSummary.js';
+import { deliveryOptions, getDeliveryOption } from '../../data/DeliveryOptions.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 export function renderOrderSummary() {
 	let cartSummaryHTML = '';
@@ -114,7 +114,7 @@ export function renderOrderSummary() {
 
 	document.querySelectorAll('.js-delivery-option').forEach((element) => {
 		element.addEventListener('click', () => {
-			const {productId, deliveryOptionId} = element.dataset;
+			const { productId, deliveryOptionId } = element.dataset;
 			updateDeliveryOption(productId, deliveryOptionId);
 			renderOrderSummary();
 			renderPaymentSummary();

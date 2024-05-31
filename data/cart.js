@@ -30,11 +30,11 @@ export function addToCart(productId, input) {
 	const matchingItem = findCartItem(productId);
 
 	if (matchingItem) {
-		matchingItem.quantity += 1;
+		matchingItem.quantity += input;
 	} else {
 		cart.push({
 			productId: productId,
-			quantity: 1,
+			quantity: input,
 			deliveryOptionId: '1',
 		});
 	}
