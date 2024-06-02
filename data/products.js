@@ -306,14 +306,7 @@ export const products = [
 			count: 83,
 		},
 		priceCents: 1250,
-		keywords: [
-			'hats',
-			'winter hats',
-			'beanies',
-			'tuques',
-			'apparel',
-			'womens',
-		],
+		keywords: ['hats', 'winter hats', 'beanies', 'tuques', 'apparel', 'womens'],
 	},
 	{
 		id: 'ee1f7c56-f977-40a4-9642-12ba5072e2b0',
