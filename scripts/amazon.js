@@ -1,6 +1,6 @@
-import {addToCart, cartQuantityTotal} from '../data/cart.js';
-import {products} from '../data/products.js';
-import {formatCurrency} from './utils/money.js';
+import { addToCart, cartQuantityTotal } from '../data/cart.js';
+import { products } from '../data/products.js';
+import { formatCurrency } from './utils/money.js';
 
 let productsHTML = '';
 
@@ -18,14 +18,14 @@ products.forEach((product) => {
 
             <div class="product-rating-container">
             <img class="product-rating-stars"
-                src="images/ratings/rating-${product.rating.stars * 10}.png">
+                src="${product.getStarsUrl()}">
             <div class="product-rating-count link-primary">
                 ${product.rating.count}
             </div>
             </div>
 
             <div class="product-price">
-            $${formatCurrency(product.priceCents)}
+                ${product.getPrice()}
             </div>
 
             <div class="product-quantity-container">
@@ -78,4 +78,3 @@ document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
 		addCartQuantity();
 	});
 });
-

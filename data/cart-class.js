@@ -35,11 +35,11 @@ class Cart {
 		const matchingItem = this.findCartItem(productId);
 
 		if (matchingItem) {
-			matchingItem.quantity += input;
+			matchingItem.quantity += input ?? 1;
 		} else {
 			this.cartItems.push({
 				productId: productId,
-				quantity: input,
+				quantity: input ?? 1,
 				deliveryOptionId: '1',
 			});
 		}
@@ -95,6 +95,6 @@ class Cart {
 		document.querySelector('.js-cart-quantity').innerHTML = `${this.cartQuantityTotal()} items`;
 	}
 }
-const cart1 = new Cart('cart-oop');
+const cart1 = new Cart('cart-class');
 
 console.log(cart1);
