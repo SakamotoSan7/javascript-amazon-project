@@ -1,10 +1,17 @@
 import { renderOrderSummary } from '../../scripts/checkout/orderSummary.js';
 import { loadFromStorage, cart } from '../../data/cart.js';
+import { loadProducts } from '../../data/products.js';
 
 /* eslint-disable */
 
 describe('test suite: renderOrderSummary', () => {
 	const product1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
+
+	beforeAll((done) => {
+		loadProducts(() => {
+			done();
+		});
+	});
 
 	afterEach(() => {
 		document.querySelector('.js-test-container').innerHTML = '';
