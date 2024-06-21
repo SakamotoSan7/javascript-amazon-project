@@ -89,3 +89,16 @@ export function renderCartQuantity() {
 export function renderItemsQuantity() {
 	document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantityTotal()} items`;
 }
+
+export function loadCart(callback) {
+	const xhr = new XMLHttpRequest();
+
+	xhr.addEventListener('load', () => {
+		console.log(xhr.response);
+
+		callback();
+	});
+
+	xhr.open('GET', 'https://supersimplebackend.dev/cart');
+	xhr.send();
+}

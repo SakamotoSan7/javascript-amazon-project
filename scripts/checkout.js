@@ -1,13 +1,56 @@
 import { renderOrderSummary } from './checkout/orderSummary.js';
 import { renderPaymentSummary } from './checkout/paymentSummary.js';
-import { renderCartQuantity, renderItemsQuantity } from '../data/cart.js';
+import { renderCartQuantity, renderItemsQuantity, loadCart } from '../data/cart.js';
 import { loadProducts } from '../data/products.js';
 //import '../data/cart-oop.js';
 //import '../data/backend-practice.js'
 
-loadProducts(() => {
+Promise.all([
+	new Promise((resolve) => {
+		loadProducts(() => {
+			resolve();
+		});
+	}),
+	new Promise((resolve) => {
+		loadCart(() => {
+			resolve();
+		});
+	}),
+]).then(() => {
 	renderOrderSummary();
 	renderPaymentSummary();
 	renderCartQuantity();
 	renderItemsQuantity();
 });
+
+/*///////////////////////////////////////////////
+new Promise((resolve) => {
+	loadProducts(() => {
+		resolve();
+	});
+})
+	.then(() => {
+		return new Promise((resolve) => {
+			loadCart(() => {
+				resolve();
+			});
+		});
+	})
+	.then(() => {
+		renderOrderSummary();
+		renderPaymentSummary();
+		renderCartQuantity();
+		renderItemsQuantity();
+	});
+*/ /////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////
+loadProducts(() => {
+	loadCart(() => {
+		renderOrderSummary();
+		renderPaymentSummary();
+		renderCartQuantity();
+		renderItemsQuantity();
+	});
+});
+*/ /////////////////////////////////////////////////
