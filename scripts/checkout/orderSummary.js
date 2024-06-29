@@ -1,4 +1,4 @@
-import { cart, removeFromCart, renderCartQuantity, updateDeliveryOption, updateQuantity } from '../../data/cart.js';
+import { cart, removeFromCart, renderCartQuantity, renderItemsQuantity, updateDeliveryOption, updateQuantity } from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
@@ -100,6 +100,34 @@ export function renderOrderSummary() {
 		return html;
 	}
 
+	//////this one function in for when click save
+	function saveQuantity(productId, newQuantity) {
+		const container = document.querySelector(`.js-cart-item-container-${productId}`);
+
+		if (newQuantity < 0) {
+			return alert('Please enter a valid quantity.');
+		} else if (newQuantity > 500) {
+			return alert('Maximum quantity exceeded.');
+		} else if (newQuantity === 0) {
+			removeFromCart(productId);
+			container.remove();
+			renderPaymentSummary();
+			return;
+		}
+
+		container.classList.remove('is-editing-quantity');
+
+		updateQuantity(productId, newQuantity);
+		renderOrderSummary();
+		renderPaymentSummary();
+		renderCartQuantity();
+		renderItemsQuantity();
+	}
+
+	///////////////////////////////////////////////////////////////////
+	////////////code below are dom manipulation////////////////////////
+	//////////////////////////////////////////////////////////////////
+
 	document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
 	document.querySelectorAll('.js-delete-link').forEach((link) => {
@@ -110,6 +138,7 @@ export function renderOrderSummary() {
 			container.remove();
 			renderPaymentSummary();
 			renderCartQuantity();
+			renderItemsQuantity();
 		});
 	});
 
@@ -133,28 +162,7 @@ export function renderOrderSummary() {
 		});
 	});
 
-	function saveQuantity(productId, newQuantity) {
-		const container = document.querySelector(`.js-cart-item-container-${productId}`);
-
-		if (newQuantity < 0) {
-			return alert('Please enter a valid quantity.');
-		} else if (newQuantity > 500) {
-			return alert('Maximum quantity exceeded.');
-		} else if (newQuantity === 0) {
-			removeFromCart(productId);
-			container.remove();
-			renderPaymentSummary();
-			return;
-		}
-
-		container.classList.remove('is-editing-quantity');
-
-		updateQuantity(productId, newQuantity);
-		renderOrderSummary();
-		renderPaymentSummary();
-		renderCartQuantity();
-	}
-
+	//////this one only for save button
 	document.querySelectorAll('.js-save-quantity-link').forEach((element) => {
 		element.addEventListener('click', () => {
 			const productId = element.dataset.productId;
@@ -164,6 +172,7 @@ export function renderOrderSummary() {
 		});
 	});
 
+	//////this one in for when click enter in quantity input number
 	document.querySelectorAll('.js-quantity-input').forEach((element) => {
 		element.addEventListener('keydown', (event) => {
 			if (event.key === 'Enter') {
@@ -173,4 +182,6 @@ export function renderOrderSummary() {
 			}
 		});
 	});
+
+	renderItemsQuantity();
 }

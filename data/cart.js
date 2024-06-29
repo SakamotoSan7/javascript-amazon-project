@@ -74,6 +74,11 @@ export function updateQuantity(productId, newQuantity) {
 	saveToStorage();
 }
 
+export function emptyAllCartItems() {
+	cart = [];
+	saveToStorage();
+}
+
 export function cartQuantityTotal() {
 	return cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
 }

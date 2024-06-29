@@ -1,8 +1,9 @@
-import { cart } from '../../data/cart.js';
+import { cart, emptyAllCartItems } from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
 import { getDeliveryOption } from '../../data/DeliveryOptions.js';
 import { formatCurrency } from '../utils/money.js';
 import { addOrder } from '../../data/orders.js';
+import { renderCartQuantity } from '../../data/cart.js';
 
 export function renderPaymentSummary() {
 	let productPriceCents = 0;
@@ -79,10 +80,12 @@ export function renderPaymentSummary() {
 			const order = await response.json();
 
 			addOrder(order);
+			emptyAllCartItems();
 		} catch (error) {
 			console.log(error);
 		}
 
 		window.location.href = 'orders.html';
 	});
+	renderCartQuantity();
 }

@@ -1,6 +1,6 @@
 import { renderOrderSummary } from '../../scripts/checkout/orderSummary.js';
 import { loadFromStorage, cart } from '../../data/cart.js';
-import { loadProducts, loadProductsFetch } from '../../data/products.js';
+import { loadProductsFetch } from '../../data/products.js';
 
 /* eslint-disable */
 
@@ -23,6 +23,7 @@ describe('test suite: renderOrderSummary', () => {
 		document.querySelector('.js-test-container').innerHTML = `
             <div class="js-order-summary"></div>
 			<div class="js-payment-summary"></div>
+			<div class="js-cart-quantity"></div>
         `;
 
 		spyOn(localStorage, 'getItem').and.callFake(() => {
@@ -35,7 +36,6 @@ describe('test suite: renderOrderSummary', () => {
 			]);
 		});
 		loadFromStorage();
-
 		renderOrderSummary();
 	});
 
