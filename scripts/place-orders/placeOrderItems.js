@@ -23,7 +23,8 @@ export async function placeOrderItems(products) {
 						<div class="product-name">${matchingProduct.name}</div>
 						<div class="product-delivery-date">Arriving on: ${formattedDate}</div>
 						<div class="product-quantity">Quantity: ${product.quantity}</div>
-						<button class="buy-again-button button-primary">
+						<button class="buy-again-button button-primary js-buy-again-button"
+						data-product-id="${product.productId}" data-quantity="${product.quantity}">
 							<img class="buy-again-icon" src="images/icons/buy-again.png" />
 							<span class="buy-again-message">Buy it again</span>
 						</button>

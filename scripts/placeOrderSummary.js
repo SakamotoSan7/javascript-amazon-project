@@ -1,7 +1,7 @@
 import { orders } from '../../data/orders.js';
 import { placeOrderItems } from './place-orders/placeOrderItems.js';
 import { formatCurrency } from './utils/money.js';
-import { cartQuantityTotal } from '../data/cart.js';
+import { cartQuantityTotal, addToCart } from '../data/cart.js';
 
 console.log(orders);
 
@@ -52,6 +52,19 @@ async function renderPlaceOrder() {
 		document.querySelector('.js-orders-grid').innerHTML = placeOrderHTML;
 
 		document.querySelector('.js-cart-quantity').innerHTML = cartQuantityTotal();
+
+		document.querySelectorAll('.js-buy-again-button').forEach((button) => {
+			button.addEventListener('click', () => {
+				const productId = button.dataset.productId;
+				let quantity = button.dataset.quantity;
+
+				// Remove leading zero by converting to an integer
+				quantity = parseInt(quantity, 10);
+
+				addToCart(productId, quantity);
+				window.location.href = 'checkout.html';
+			});
+		});
 	} catch (error) {
 		console.error('Failed to render place orders', error);
 		document.querySelector('.js-orders-grid').innerHTML = `<div class="error-message">There was an error loading the orders. Please try again later.</div>`;
