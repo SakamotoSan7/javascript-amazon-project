@@ -24,6 +24,7 @@ describe('test suite: renderOrderSummary', () => {
             <div class="js-order-summary"></div>
 			<div class="js-payment-summary"></div>
 			<div class="js-cart-quantity"></div>
+			<button id="closePopupBtn">Close</button>
         `;
 
 		spyOn(localStorage, 'getItem').and.callFake(() => {

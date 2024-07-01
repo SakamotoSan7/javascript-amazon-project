@@ -65,8 +65,24 @@ export function renderPaymentSummary() {
 
 	document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
 
+	// Function to show the custom pop-up
+	function showCustomPopup() {
+		document.getElementById('customPopup').style.display = 'block';
+	}
+
+	// Function to hide the custom pop-up
+	function hideCustomPopup() {
+		document.getElementById('customPopup').style.display = 'none';
+	}
+
+	// Event listener for place order button
 	document.querySelector('.js-place-order-button').addEventListener('click', async () => {
 		try {
+			if (cart.length === 0) {
+				showCustomPopup(); // Show custom pop-up if cart is empty
+				return; // Exit early if cart is empty
+			}
+
 			const response = await fetch('https://supersimplebackend.dev/orders', {
 				method: 'POST',
 				headers: {
@@ -81,11 +97,16 @@ export function renderPaymentSummary() {
 
 			addOrder(order);
 			emptyAllCartItems();
+
+			// Redirect to orders.html after processing
+			window.location.href = 'orders.html';
 		} catch (error) {
 			console.log(error);
 		}
-
-		window.location.href = 'orders.html';
 	});
+
+	// Event listener for close button in custom pop-up
+	document.getElementById('closePopupBtn').addEventListener('click', hideCustomPopup);
+
 	renderCartQuantity();
 }

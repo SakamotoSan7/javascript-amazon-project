@@ -25,7 +25,7 @@
 					<a href="amazon.html">
 						<img class="amazon-logo" src="images/amazon-logo.png" />
 						<img class="amazon-mobile-logo" src="images/amazon-mobile-logo.png" />
-					</a> 
+					</a>
 				</div>
 
 				<div class="checkout-header-middle-section">Checkout (<a class="return-to-home-link js-cart-quantity" href="amazon.html">0 items</a>)</div>
@@ -46,7 +46,16 @@
 			</section>
 		</main>
 
+		<div id="customPopup" class="custom-popup">
+			<div class="popup-content">
+				<h2>Your Cart is Empty!</h2>
+				<p>Please add items to your cart before placing an order.</p>
+				<button id="closePopupBtn">Close</button>
+			</div>
+		</div>
+
 		<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD&disable-funding=venmo,paylater"></script>
 		<script type="module" src="scripts/checkout.js"></script>
 	</body>
 </html>
+

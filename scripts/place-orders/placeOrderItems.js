@@ -1,14 +1,14 @@
 import { getProduct, loadProductsFetch } from '../../data/products.js';
 
-export async function placeOrderItems(products) {
+export async function placeOrderItems(order) {
 	try {
 		await loadProductsFetch();
 
 		let placeOrderHTML = '';
 
-		for (const product of products) {
+		for (const product of order.products) {
 			try {
-				const matchingProduct = await getProduct(product.productId);
+				const matchingProduct = getProduct(product.productId);
 
 				const date = new Date(product.estimatedDeliveryTime);
 				const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -31,7 +31,7 @@ export async function placeOrderItems(products) {
 					</div>
 
 					<div class="product-actions">
-						<a href="tracking.html">
+						<a href="tracking.html?orderId=${order.id}&productId=${product.productId}">
 							<button class="track-package-button button-secondary">Track package</button>
 						</a>
 					</div>

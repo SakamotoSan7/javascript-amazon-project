@@ -16,7 +16,7 @@ async function renderPlaceOrder() {
 				const formattedDate = date.toLocaleDateString('id-ID', options);
 
 				// Wait for placeOrderItems promise to resolve
-				const orderItemsHTML = await placeOrderItems(order.products);
+				const orderItemsHTML = await placeOrderItems(order);
 
 				placeOrderHTML += `
 		            <div class="order-container">
@@ -51,7 +51,7 @@ async function renderPlaceOrder() {
 
 		document.querySelector('.js-orders-grid').innerHTML = placeOrderHTML;
 
-		document.querySelector('.js-cart-quantity').innerHTML = cartQuantityTotal();
+		document.querySelector('.js-cart-quantity').textContent = cartQuantityTotal();
 
 		document.querySelectorAll('.js-buy-again-button').forEach((button) => {
 			button.addEventListener('click', () => {

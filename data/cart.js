@@ -84,11 +84,11 @@ export function cartQuantityTotal() {
 }
 
 export function renderCartQuantity() {
-	document.querySelector('.js-items-quantity').innerHTML = `Items (${cartQuantityTotal()}):`;
+	document.querySelector('.js-items-quantity').textContent = `Items (${cartQuantityTotal()}):`;
 }
 
 export function renderItemsQuantity() {
-	document.querySelector('.js-cart-quantity').innerHTML = `${cartQuantityTotal()} items`;
+	document.querySelector('.js-cart-quantity').textContent = `${cartQuantityTotal()} items`;
 }
 
 export function loadCart(callback) {
