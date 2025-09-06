@@ -1,4 +1,4 @@
-# JavaScript Amazon Project
+# 🛒 JavaScript Amazon Project
 
 Welcome to the **JavaScript Amazon Project**! 🚀  
 This project is a showcase of my skills as a web developer, combining creativity, functionality, and clean code to build a simplified version of an e-commerce platform inspired by Amazon. My name is **Kristianto**, and I’m passionate about crafting user-friendly and visually appealing web applications.
